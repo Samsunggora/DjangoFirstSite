@@ -3,11 +3,12 @@ from .models import Category
 
 
 class New_forms(forms.Form):
-    title = forms.CharField(max_length=255, min_length=3, label='Title',
-                            widget=forms.TextInput(attrs={'class': "form-control"}))
-    content = forms.CharField(label='Content:', required=False,
-                              widget=forms.Textarea(attrs={'class': "form-control"}))
-    is_published = forms.BooleanField(label='Published?', initial=True)
-    category = forms.ModelChoiceField(queryset=Category.objects.all(), label='Category:',
-                                      empty_label='Please choose category',
-                                      widget=forms.Select(attrs={'class': "form-control"}))
+    title = forms.CharField(max_length=150, label='Название', widget=forms.TextInput(attrs={"class": "form-control"}))
+    content = forms.CharField(label='Текст', required=False, widget=forms.Textarea(attrs={
+        "class": "form-control",
+        "rows": 5
+    }))
+    is_published = forms.BooleanField(label='Опубликовано?', initial=True)
+    category = forms.ModelChoiceField(empty_label='Выберите категорию', label='Категория',
+                                      queryset=Category.objects.all(),
+                                      widget=forms.Select(attrs={"class": "form-control"}))
